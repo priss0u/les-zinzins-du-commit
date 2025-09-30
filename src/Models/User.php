@@ -78,7 +78,7 @@ class User
     }
 
     //Les set
-    
+
     public function setIdUser (int $id_user): void
 
     {
@@ -128,7 +128,5 @@ class User
         $this->id_role = $id_role;
     }
 }
-
-
 
 ?>
