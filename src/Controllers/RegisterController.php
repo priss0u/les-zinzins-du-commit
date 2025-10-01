@@ -26,7 +26,7 @@ class RegisterController extends AbstractController
                 $today = date('Y-m-d');
                 //Hash le mot de passe :
                 $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-                $user = new User(null, $pseudo, $passwordHash, $email, null, $description, $today, 2);
+                $user = new User(null, $pseudo, $passwordHash, $email, null, $description, $today, 1);
                 $ifExist = $user->getUserByEmail();
 
                 if($ifExist){
