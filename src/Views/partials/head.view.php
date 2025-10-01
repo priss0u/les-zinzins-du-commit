@@ -23,7 +23,7 @@
           if(isset($_SESSION['user'])){
         ?>
           <li class="nav-item">
-            <a class="nav-link" href="/deconnexion">Se déconnecter</a>
+            <a class="nav-link" href="/deconnexion">Se deconnecter</a>
           </li>
         <?php
           } else {
@@ -37,6 +37,9 @@
         <?php
         }
         ?>
+        <li class="nav-item">
+            <a class="nav-link" href="/ajoutCommit">Ajouter un commit</a>
+          </li>
       </ul>
     </div>
   </div>
