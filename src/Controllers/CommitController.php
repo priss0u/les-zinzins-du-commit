@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Comment;
 use App\Models\Commit;
 use App\Utils\AbstractController;
 
@@ -39,6 +40,17 @@ class CommitController extends AbstractController
 
             if($myCommit)
             {
+                if(isset($_POST['addComment'])){
+                    $text = htmlspecialchars($_POST['comment']);
+                    $this->totalCheck('comment', $text);
+                    if(empty($this->arrayError)){
+                        $today = date("Y-m-d");
+                        $comment = new Comment(null, $text, $today, null, $id, $_SESSION['user']['id_user']);
+                        $comment->addComment();
+                        $this->redirectToRoute('/commit?id=' . $id, 200);
+                    }
+                }
+
                 require_once(__DIR__ . "/../Views/commit.view.php");
             }else{
                 $this->redirectToRoute('/', 302);
@@ -46,5 +58,36 @@ class CommitController extends AbstractController
         }else{
             $this->redirectToRoute('/', 302);
         }
+    }
+
+    public function editCommit()
+    {
+        if(isset($_GET['id'])){
+            $id = htmlspecialchars($_GET['id']);
+            $commit = new Commit($id, null, null, null, null, null, null, null, null, null, null);
+            $myCommit = $commit->getCommitById();
+            
+            if($myCommit && ($_SESSION['user']['id_user'] === $myCommit->getUserId())){
+
+                if(isset($_POST['editCommit'])){
+                    $text = htmlspecialchars($_POST['commit']);
+                    $this->totalCheck('commit', $text);
+
+                    if(empty($this->arrayError)){
+                        $today = date("Y-m-d");
+                        $updateCommit = new Commit($id, $text, null, $today, null, null, null, null, null, null);
+                        $updateCommit->editCommit();
+                        $this->redirectToRoute('/commit?id='.$id , 200);
+                    }
+                }
+
+                require_once(__DIR__ . "/../Views/editCommit.view.php");
+            }else{
+                $this->redirectToRoute('/', 302);
+            }
+        }else{
+            $this->redirectToRoute('/', 302);
+        }
+        
     }
 }
