@@ -40,7 +40,9 @@ class CommitController extends AbstractController
 
             if($myCommit)
             {
+
                 //formulaire du commentaire
+
                 if(isset($_POST['addComment'])){
                     $text = htmlspecialchars($_POST['comment']);
                     $this->totalCheck('comment', $text);
