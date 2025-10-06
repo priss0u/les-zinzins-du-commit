@@ -38,8 +38,6 @@ class CommentController extends AbstractController
                 $this->RedirectToRoute('/', 302);
             }
             
-
-
             //Si la personne clique sur le submit alors vérifier les erreurs puis créer une méthode update pour envoyer la modification
         }else{
             $this->RedirectToRoute('/', 302);
@@ -51,7 +49,7 @@ class CommentController extends AbstractController
     {
         if(isset($_POST['id'])){
             $id = htmlspecialchars($_POST['id']);
-            $comment = new Comment($id, null, null, null, null, null);
+            $comment = new Comment($id, null, null, null, null, null, null);
             $myComment = $comment->getCommentById();
 
             //Je veux que le commentaire existe et que ce soit la personne qui a créer le commentaire ou alors que ce soit un admin
